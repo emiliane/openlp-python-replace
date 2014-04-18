@@ -39,6 +39,21 @@ def changeCharacters(fileRead):
     else:
         print ('File: ' + fileRead)
 
+def changeCharacters2(fileRead):
+    ins = open(fileRead, 'r', encoding='utf-8')
+
+    lyrics = ''
+    for line in ins:
+        lyrics += line
+
+    lyrics = re.sub('\.{3,}', "…", lyrics)
+
+    punctuation_mark = [".", ",", ";", ":", "!", "?", "…"]
+    for punctuation in punctuation_mark:
+        lyrics = lyrics.replace(punctuation, punctuation + " ")
+
+    lyrics = lyrics.replace("\t", " ")
+    lyrics = re.sub(' {2,}', " ", lyrics)
 
 def unzip(filename, path):
     temp = path + filename + ".temp/"
