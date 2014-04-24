@@ -1,6 +1,25 @@
 import os, subprocess
 import xml.etree.ElementTree as ET
 
+ET.register_namespace('', 'http://openlyrics.info/namespace/2009/song')
+
+def authorNumberFive(string, filename):
+    parts = string.split('authors', 3)
+
+    authors = parts[1].split('<author>1</author>', 2)
+
+    authorNumber = '0'
+    try:
+        authorNumber = authors[1].split('<')[1].split('>')[1]
+    except:
+        print ('Introduceti manual numarul: \n')
+        print (filename + "\n")
+        authorNumber = input()
+
+    result = parts[0] + 'authors>\n      <author>' + authorNumber + '</author>\n    </authors' + parts[2]
+
+    return result
+
 def changeCharacters(fileRead):
     ins = open(fileRead, 'r', encoding='utf-8')
 
