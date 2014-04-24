@@ -1,4 +1,5 @@
 import os, subprocess
+import xml.etree.ElementTree as ET
 
 def changeCharacters(fileRead):
     ins = open(fileRead, 'r', encoding='utf-8')
