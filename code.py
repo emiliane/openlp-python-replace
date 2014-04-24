@@ -66,6 +66,17 @@ def unzip(filename, path):
     subprocess.call(["zip", "-0", "-X", "../"+ filename + ".odt", "mimetype"])
     print(["zip -r ../" + filename + ".zip * -x mimetype"])
     subprocess.call(["zip -r ../" + filename + ".odt * -x mimetype"], shell=True)
+    
+def addSongBookAndNumber(songXML):
+    root = ET.fromstring(songXML)
+    numberOfSongBook = list(root.iter('{http://openlyrics.info/namespace/2009/song}songbook'))[0].get('entry')
+
+    for child in root.iter('{http://openlyrics.info/namespace/2009/song}title'):
+        child.text = child.text + ' ' + numberOfSongBook
+        print('Title edited: ' + child.text)
+
+    a = ET.tostring(root, encoding='utf-8', method='xml')
+    return a.decode('utf-8')
 
 
 #path = './';
